@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'ferbtasticregular';
+    src: url('/fonts/phineas_y_ferb-webfont.ttf') format('ttf'),
+        url('/fonts/phineas_y_ferb-webfont.woff2') format('woff2'),
+        url('/fonts/phineas_y_ferb-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+*,
+*::before,
+*::after {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'ferbtasticregular', Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+}
+
+:root {
+    --primary-blue: #7a61d5;
+    --secondary-blue: #84dcfc;
+    --platypus-perry: #189090;
+    --text-color: #dfb146;
+    --primary-black: #1d1a1a;
+}
+
+
+*::selection{
+    color: lightsalmon;
+    background-color: white;
+
+}
+
+body {
+    background: linear-gradient(var(--platypus-perry), var(--primary-blue));
+    display:grid;
+    place-content: center;
+    padding: 1rem;
+    row-gap:.8rem;
+}
+
+h1 {
+    font-size: 6rem;
+    text-align: center;
+}
+
+
+#translate-input{
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+    border-color: var(--primary-black);
+    border-width: medium;
+    background-color: #ebdede;
+    outline: none;
+    height: 10rem;
+}
+
+#translate-input::placeholder {
+    font-weight: lighter;
+  }
+
+#translate-output {
+    background-color: #ebdede;
+    border-color: var(--primary-black); 
+    border-width: medium;
+    padding: 1rem;
+}
+
+#btn-translate {
+    padding: 1rem 2rem;
+    width: max-content;
+    font-weight: 700;
+    font-size: small;
+    background-color: transparent;
+    border-radius: 7px;
+    margin: auto;
+    outline: none;
+    transition:background-color 300ms ease-in-out,
+    color 1s ease-in-out;
+}
+
+#btn-translate:hover {
+    background-color: var(--primary-black);
+    color: var(--secondary-blue);
+}
+
+footer{
+    width: 50vw;
+    text-align: justify;
+}
+
+@media (max-width:660px){
+    h1{
+        font-size: 3em;
+    }
+
+    #translate-input{
+        width: 85vw;
+    }
+    footer{
+        width: 90vw;
+    }
+    p{
+        font-size: 1rem;
+    }
+}
