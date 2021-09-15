@@ -2,6 +2,16 @@ const btnTranslate = document.querySelector('#btn-translate');
 const translateInput = document.querySelector('#translate-input');
 const translateOutput = document.querySelector('#translate-output');
 
+
+function addBackgroundAnimation() {
+    translateOutput.innerText = '';
+    translateOutput.classList.add('animation');
+    translateOutput.addEventListener('animationend', () => {
+        translateOutput.classList.remove('animation');
+        clickEventHandler();
+    });
+}
+
 const url = "https://api.funtranslations.com/translate/ferb-latin.json";
 
 function constructURL(inputText) {
@@ -31,7 +41,7 @@ async function clickEventHandler(event) {
             const json = await response.json();
             console.log(json)
             translateOutput.innerText = json.contents.translated;
-        } else{
+        } else {
             throw new Error('Request failed.');
         }
     } catch (err) {
@@ -39,4 +49,4 @@ async function clickEventHandler(event) {
     }
 };
 
-btnTranslate.addEventListener('click', clickEventHandler);
+btnTranslate.addEventListener('click', addBackgroundAnimation);

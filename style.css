@@ -13,32 +13,30 @@
 *::after {
     margin: 0px;
     padding: 0px;
+    font-size: 1rem;
     box-sizing: border-box;
     font-family: 'ferbtasticregular', Arial, Helvetica, sans-serif;
     color: var(--text-color);
 }
 
 :root {
-    --primary-blue: #7a61d5;
-    --secondary-blue: #84dcfc;
-    --platypus-perry: #189090;
-    --text-color: #dfb146;
+    --primary-blue: #84dcfc;
     --primary-black: #1d1a1a;
 }
 
 
-*::selection{
+*::selection {
     color: lightsalmon;
     background-color: white;
 
 }
 
 body {
-    background: linear-gradient(var(--platypus-perry), var(--primary-blue));
-    display:grid;
+    background-color: var(--primary-blue);
+    display: grid;
     place-content: center;
     padding: 1rem;
-    row-gap:.8rem;
+    row-gap: .8rem;
 }
 
 h1 {
@@ -47,10 +45,10 @@ h1 {
 }
 
 
-#translate-input{
+#translate-input,
+#translate-output {
     border-radius: 1rem;
     padding: 1rem;
-    font-size: 1rem;
     border-color: var(--primary-black);
     border-width: medium;
     background-color: #ebdede;
@@ -60,50 +58,74 @@ h1 {
 
 #translate-input::placeholder {
     font-weight: lighter;
-  }
-
-#translate-output {
-    background-color: #ebdede;
-    border-color: var(--primary-black); 
-    border-width: medium;
-    padding: 1rem;
 }
+
 
 #btn-translate {
     padding: 1rem 2rem;
     width: max-content;
     font-weight: 700;
-    font-size: small;
+    font-size: medium;
     background-color: transparent;
     border-radius: 7px;
     margin: auto;
     outline: none;
-    transition:background-color 300ms ease-in-out,
-    color 1s ease-in-out;
+    box-shadow: 0 0 3px gray;
+    transition: background-color 300ms ease-in-out,
+        color 1s ease-in-out;
+}
+
+.translation-output-heading {
+    font-size: 1.2rem;
 }
 
 #btn-translate:hover {
     background-color: var(--primary-black);
-    color: var(--secondary-blue);
+    color: var(--primary-blue);
 }
 
-footer{
+footer {
     width: 50vw;
     text-align: justify;
 }
 
-@media (max-width:660px){
-    h1{
+@media (max-width:660px) {
+    h1 {
         font-size: 3em;
     }
 
-    #translate-input{
+    #translate-input {
         width: 85vw;
     }
-    footer{
+
+    footer {
         width: 90vw;
     }
-    p{
+
+    p {
         font-size: 1rem;
     }
+}
+
+
+
+
+.animation {
+    animation: 5s gif-add;
+}
+
+@keyframes gif-add {
+    from {
+        background: url(/images/perry-the-platypus.gif) center center no-repeat;
+    }
+
+
+    99% {
+        background: url(/images/perry-the-platypus.gif) center center no-repeat;
+    }
+
+    to {
+        background: #ebdede;
+    }
+
 }
