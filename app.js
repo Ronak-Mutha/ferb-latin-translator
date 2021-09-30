@@ -17,11 +17,12 @@ function errorHandler(error) {
     msg.innerText = error;
 }
 
-function addBackgroundAnimation() {
+function addBackgroundAnimation(finalURL) {
     translateOutput.innerText = '';
     translateOutput.classList.add('animation');
     translateOutput.addEventListener('animationend', () => {
         translateOutput.classList.remove('animation');
+        fetchTranslatedText(finalURL);
 
     });
 }
@@ -41,20 +42,10 @@ function closeAlert() {
     alertContainer.classList.add('hide');
 }
 
-async function clickEventHandler(event) {
-    const translateInputValue = translateInput.value;
-    const finalURL = constructURL(translateInputValue);
 
-    if (translateInputValue == '') {
-        showAlert()
-        msg.innerText = 'Please enter text you want to translate.'
-        return;
-    }
-    
-    addBackgroundAnimation();
-
+async function fetchTranslatedText(url) {
     try {
-        const response = await fetch(finalURL);
+        const response = await fetch(url);
         const json = await response.json();   
         if (response.ok) {
             translateOutput.innerText = json.contents.translated;
@@ -64,6 +55,18 @@ async function clickEventHandler(event) {
     } catch (err) {
         errorHandler(err);
     }
+}
+
+async function clickEventHandler(event) {
+    const translateInputValue = translateInput.value;
+    const finalURL = constructURL(translateInputValue);
+
+    if (translateInputValue == '') {
+        showAlert()
+        msg.innerText = 'Please enter text you want to translate.'
+        return;
+    }   
+    addBackgroundAnimation(finalURL);
 };
 
 btnTranslate.addEventListener('click', clickEventHandler);
