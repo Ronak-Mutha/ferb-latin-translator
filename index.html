@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferb Latin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
     <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -14,6 +15,15 @@
     <textarea name='input' id='translate-input' cols='30' rows='10'
         placeholder='Put the English sentence which you want to translate to Ferb Latin here.'></textarea>
     <button id='btn-translate'>Translate To Ferb Latin</button>
+
+    <div class="alert hide">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg"></span>
+        <div class="close-btn">
+           <span class="fas fa-times"></span>
+        </div>
+     </div>
+
     <div class='translation-output-heading'>Translation will come here👇</div>
     <textarea name="output" cols="30" rows="10" id="translate-output" disabled></textarea>
 

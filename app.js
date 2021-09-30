@@ -1,16 +1,9 @@
 const btnTranslate = document.querySelector('#btn-translate');
 const translateInput = document.querySelector('#translate-input');
+const alertContainer = document.querySelector('.alert');
+const btnClose = document.querySelector('.close-btn');
+const msg = document.querySelector('.msg');
 const translateOutput = document.querySelector('#translate-output');
-
-
-function addBackgroundAnimation() {
-    translateOutput.innerText = '';
-    translateOutput.classList.add('animation');
-    translateOutput.addEventListener('animationend', () => {
-        translateOutput.classList.remove('animation');
-        clickEventHandler();
-    });
-}
 
 const url = "https://api.funtranslations.com/translate/ferb-latin.json";
 
@@ -19,34 +12,60 @@ function constructURL(inputText) {
     return `${url}?text=${encodedURI}`;
 }
 
+function errorHandler(error) {
+    showAlert();
+    msg.innerText = error;
+}
+
+function addBackgroundAnimation() {
+    translateOutput.innerText = '';
+    translateOutput.classList.add('animation');
+    translateOutput.addEventListener('animationend', () => {
+        translateOutput.classList.remove('animation');
+
+    });
+}
+
+
+function showAlert() {
+    alertContainer.classList.add('show');
+    alertContainer.classList.remove('hide');
+    alertContainer.classList.add('showAlert');
+    setTimeout(function () {
+        closeAlert();
+    }, 4000);
+};
+
+function closeAlert() {
+    alertContainer.classList.remove('show');
+    alertContainer.classList.add('hide');
+}
+
 async function clickEventHandler(event) {
-    console.log("button clicked");
     const translateInputValue = translateInput.value;
     const finalURL = constructURL(translateInputValue);
 
-    if (translateInputValue == "") {
-        alert("Please enter some text");
+    if (translateInputValue == '') {
+        showAlert()
+        msg.innerText = 'Please enter text you want to translate.'
         return;
     }
-
-    function errorHandler(error) {
-        console.log("something's fishy?", error);
-        alert("something's fishy? try again later")
-    }
+    
+    addBackgroundAnimation();
 
     try {
         const response = await fetch(finalURL);
-        console.log(response);
+        const json = await response.json();   
         if (response.ok) {
-            const json = await response.json();
-            console.log(json)
             translateOutput.innerText = json.contents.translated;
-        } else {
-            throw new Error('Request failed.');
+        } else {        
+            throw new Error(`${json.error.code} - ${json.error.message}`);
         }
     } catch (err) {
-        console.log(errorHandler(err));
+        errorHandler(err);
     }
 };
 
-btnTranslate.addEventListener('click', addBackgroundAnimation);
+btnTranslate.addEventListener('click', clickEventHandler);
+
+btnClose.addEventListener('click', closeAlert);
